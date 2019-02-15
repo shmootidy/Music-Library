@@ -14,6 +14,9 @@ function Playlist (name) {
 
   this.tracks = [];
 
+  this.addTr = function(newTr) {
+    this.tracks.push(newTr);
+  }
   // overallRating(this.tracks) {
   //   // return sum of track ratings / num of tracks
   // }
@@ -31,5 +34,11 @@ function Track (title, rating, length) {
 const shmoosLibrary = new Library('dark80s', 'Shmoo');
 const siouxsiePL = new Playlist('Siouxsie');
 shmoosLibrary.addPL(siouxsiePL);
+siouxsiePL.addTr(new Track('Melt', '5', '3:55'));
+siouxsiePL.addTr(new Track('Swimming Horses', '5', '4:04'));
+console.log(shmoosLibrary);
+console.log(shmoosLibrary.playlists);
+console.log(shmoosLibrary.playlists[0].tracks);
+
 
 
