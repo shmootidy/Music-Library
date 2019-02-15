@@ -1,9 +1,16 @@
-function convertTime(string) {
+function convertToSeconds(string) {
   const splitNumStr = string.split(':');
   return (
     (Number(splitNumStr[0]) * 60) + Number(splitNumStr[1])
   );
 }
+
+function convertToMinSecStr(num) {
+  let minutes = String(Math.floor(num / 60));
+  let seconds = String(num % 60);
+  return `${minutes}:${seconds}`;
+}
+
 function Library (name, creator) {
   this.name = name;
   this.creator = creator;
@@ -31,7 +38,11 @@ function Playlist (name) {
     return `The overall rating for the playlist '${PL.name}' is ${sumOfRatings / PL.tracks.length}.`;
   }
   this.totalDuration = function(PL) {
-    // return sum of track lengths
+    let sumOfTrackLengths = 0;
+    PL.tracks.forEach(track => {
+      sumOfTrackLengths += convertToSeconds(track.length)
+    })
+    return `The total duration for the playlist '${PL.name}' is ${convertToMinSecStr(sumOfTrackLengths)}.`;
   }
 }
 
@@ -55,5 +66,6 @@ siouxsiePL.addTr(new Track('Arabian Knights', 4, '3:19'));
 // console.log(shmoosLibrary.playlists[0].tracks);
 
 console.log(shmoosLibrary.playlists[0].overallRating(shmoosLibrary.playlists[0]))
+console.log(shmoosLibrary.playlists[0].totalDuration(shmoosLibrary.playlists[0]))
 
 
