@@ -1,3 +1,9 @@
+function convertTime(string) {
+  const splitNumStr = string.split(':');
+  return (
+    (Number(splitNumStr[0]) * 60) + Number(splitNumStr[1])
+  );
+}
 function Library (name, creator) {
   this.name = name;
   this.creator = creator;
@@ -17,12 +23,16 @@ function Playlist (name) {
   this.addTr = function(newTr) {
     this.tracks.push(newTr);
   }
-  // overallRating(this.tracks) {
-  //   // return sum of track ratings / num of tracks
-  // }
-  // totalDuration(this.tracks) {
-  //   // return sum of track lengths
-  // }
+  this.overallRating = function(PL) {
+    let sumOfRatings = 0;
+    PL.tracks.forEach(track => {
+      sumOfRatings += track.rating;
+    })
+    return `The overall rating for the playlist '${PL.name}' is ${sumOfRatings / PL.tracks.length}.`;
+  }
+  this.totalDuration = function(PL) {
+    // return sum of track lengths
+  }
 }
 
 function Track (title, rating, length) {
@@ -34,11 +44,16 @@ function Track (title, rating, length) {
 const shmoosLibrary = new Library('dark80s', 'Shmoo');
 const siouxsiePL = new Playlist('Siouxsie');
 shmoosLibrary.addPL(siouxsiePL);
-siouxsiePL.addTr(new Track('Melt', '5', '3:55'));
-siouxsiePL.addTr(new Track('Swimming Horses', '5', '4:04'));
-console.log(shmoosLibrary);
-console.log(shmoosLibrary.playlists);
-console.log(shmoosLibrary.playlists[0].tracks);
+siouxsiePL.addTr(new Track('Melt', 5, '3:55'));
+siouxsiePL.addTr(new Track('Swimming Horses', 5, '4:04'));
+siouxsiePL.addTr(new Track('Hong Kong Garden', 2, '2:43'));
+siouxsiePL.addTr(new Track('The Passenger', 4.5, '4:09'));
+siouxsiePL.addTr(new Track('Arabian Knights', 4, '3:19'));
 
+// console.log(shmoosLibrary);
+// console.log(shmoosLibrary.playlists);
+// console.log(shmoosLibrary.playlists[0].tracks);
+
+console.log(shmoosLibrary.playlists[0].overallRating(shmoosLibrary.playlists[0]))
 
 
