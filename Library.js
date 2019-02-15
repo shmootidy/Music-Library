@@ -30,12 +30,18 @@ function Playlist (name) {
   this.addTr = function(newTr) {
     this.tracks.push(newTr);
   }
+
+  this.addTrs = function(newTrsArr) {
+    newTrsArr.forEach(track => {
+      this.addTr(new Track(track[0], track[1], track[2]));
+    })
+  }
   this.overallRating = function(PL) {
     let sumOfRatings = 0;
     PL.tracks.forEach(track => {
       sumOfRatings += track.rating;
     })
-    return `The overall rating for the playlist '${PL.name}' is ${sumOfRatings / PL.tracks.length}.`;
+    return `The overall rating for the playlist '${PL.name}' is ${Math.round(sumOfRatings / PL.tracks.length * 100) / 100}.`;
   }
   this.totalDuration = function(PL) {
     let sumOfTrackLengths = 0;
@@ -61,9 +67,8 @@ siouxsiePL.addTr(new Track('Hong Kong Garden', 2, '2:43'));
 siouxsiePL.addTr(new Track('The Passenger', 4.5, '4:09'));
 siouxsiePL.addTr(new Track('Arabian Knights', 4, '3:19'));
 
-// console.log(shmoosLibrary);
-// console.log(shmoosLibrary.playlists);
-// console.log(shmoosLibrary.playlists[0].tracks);
+const newTracks = [['Staircase', 3.7, '3:01'], ['The Last Beat Of My Heart', 5, '4:34']];
+siouxsiePL.addTrs(newTracks);
 
 console.log(shmoosLibrary.playlists[0].overallRating(shmoosLibrary.playlists[0]))
 console.log(shmoosLibrary.playlists[0].totalDuration(shmoosLibrary.playlists[0]))
